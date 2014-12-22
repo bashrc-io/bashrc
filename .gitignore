@@ -1,0 +1,5 @@
+# Ingore any modules...
+.bashrc.d/*
+
+# Except our base module to reset the globstar used in the main script
+!.bashrc.d/00_globstar_reset.brc

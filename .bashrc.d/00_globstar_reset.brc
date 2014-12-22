@@ -1,0 +1,5 @@
+# Reset globstar to default setting, only enabled it to make life easier in
+# the main .bashrc file. If the user wants globstar is should be their decision
+# to enable this.
+
+shopt -u globstar

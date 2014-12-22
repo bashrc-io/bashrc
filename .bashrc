@@ -20,3 +20,18 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+#############
+# CONSTANTS #
+#############
+
+# Directory where **.brc files should be located
+export BASHRC_DIR=./.bashrc.d
+
+# We need globstar (and when I say need, I mean its nicer to use it than not)
+shopt -s globstar
+
+# Find all .brc scripts in the BASHRC_DIR and 
+for script in $BASHRC_DIR/**/*.brc
+do
+	. $script
+done
