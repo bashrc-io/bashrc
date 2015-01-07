@@ -24,13 +24,22 @@
 # CONSTANTS #
 #############
 
-# Directory where **.brc files should be located
-export BASHRC_DIR=./.bashrc.d
+# Directory where **/*.brc files should be located
+export BASHRC_DIR=$(readlink -f ./.bashrc.d)
+export GLOBAL_BASHRC_DIR=$(readlink -f $(dirname ${BASH_SOURCE[0]})/.bashrc.d)
 
 # We need globstar (and when I say need, I mean its nicer to use it than not)
 shopt -s globstar
 
-# Find all .brc scripts in the BASHRC_DIR and 
+# Find all .brc scripts in the BASHRC_DIR and GLOBAL_BASHRC_DIR
+if [ "$BASHRC_DIR" = "$GLOBAL_BASHRC_DIR" ]; then
+	# Same directory just use one
+	SCRIPTS=$BASHRC_DIR/**/*.brc
+else
+	# Merge and sort SCRIPTS
+	SCRIPTS=$(ls $BASHRC_DIR/**/*.brc $GLOBAL_BASHRC_DIR/**/*.brc | sort)
+fi
+# Source each script
 for script in $BASHRC_DIR/**/*.brc
 do
 	. $script
